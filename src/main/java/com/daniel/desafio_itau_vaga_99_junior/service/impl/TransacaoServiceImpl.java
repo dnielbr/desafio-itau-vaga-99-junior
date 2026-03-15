@@ -36,7 +36,7 @@ public class TransacaoServiceImpl implements TransacaoService {
         OffsetDateTime inicio = OffsetDateTime.now().minusSeconds(60);
 
         DoubleSummaryStatistics statistics = this.transacoes.stream().
-                filter((t) -> t.getDataHora().isAfter(inicio))
+                filter((t) -> !t.getDataHora().isBefore(inicio))
                 .collect(Collectors.summarizingDouble(Transacao::getValor));
 
         return new StatisticsResponse(
