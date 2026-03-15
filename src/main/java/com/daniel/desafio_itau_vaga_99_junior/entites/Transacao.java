@@ -29,6 +29,6 @@ public class Transacao {
     }
 
     public boolean isValid() {
-        return this.valor >= 0 && this.dataHora.isBefore(OffsetDateTime.now());
+        return this.valor >= 0 && !this.dataHora.isAfter(OffsetDateTime.now());
     }
 }
