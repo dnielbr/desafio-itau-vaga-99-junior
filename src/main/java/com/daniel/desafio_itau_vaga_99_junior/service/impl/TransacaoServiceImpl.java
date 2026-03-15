@@ -21,7 +21,7 @@ public class TransacaoServiceImpl implements TransacaoService {
 
     @Override
     public boolean save(Transacao transacao) {
-        if(transacao.isValid()) {
+        if (transacao.isValid()) {
             transacoes.add(transacao);
             return true;
         }
@@ -39,18 +39,16 @@ public class TransacaoServiceImpl implements TransacaoService {
         OffsetDateTime inicio = OffsetDateTime.now().minusSeconds(60);
 
         long start = System.nanoTime();
-        DoubleSummaryStatistics statistics = this.transacoes.stream().
-                filter((t) -> !t.getDataHora().isBefore(inicio))
+        DoubleSummaryStatistics statistics = this.transacoes.stream().filter((t) -> !t.getDataHora().isBefore(inicio))
                 .collect(Collectors.summarizingDouble(Transacao::getValor));
         long duracao = System.nanoTime() - start;
-        logger.info("Duração para executar a busca de estatísticas foi de: {}ms", duracao/1000000 );
+        logger.info("Duração para executar a busca de estatísticas foi de: {}ms", duracao / 1000000);
 
         return new StatisticsResponse(
                 statistics.getCount(),
                 statistics.getSum(),
                 statistics.getAverage(),
                 statistics.getCount() > 0 ? statistics.getMin() : 0,
-                statistics.getCount() > 0 ? statistics.getMax() : 0
-        );
+                statistics.getCount() > 0 ? statistics.getMax() : 0);
     }
 }

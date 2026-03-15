@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/transacao")
 public class TransacaoController {
 
     private final Logger logger = LoggerFactory.getLogger(TransacaoController.class);
@@ -20,7 +19,7 @@ public class TransacaoController {
         this.transacaoService = transacaoService;
     }
 
-    @PostMapping
+    @PostMapping("/transacao")
     public ResponseEntity<?> criarTransacao(@RequestBody Transacao transacao){
         logger.info("Transacao iniciada com valor: {} e data: {}", transacao.getValor(), transacao.getDataHora());
         if(transacaoService.save(transacao)) {
@@ -31,14 +30,14 @@ public class TransacaoController {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
     }
 
-    @DeleteMapping
+    @DeleteMapping("/transacao")
     public ResponseEntity<?> deletarTransacoes(){
         logger.info("Deletando todas as transações da memória.");
         transacaoService.delete();
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
+    @GetMapping("/estatistica")
     public ResponseEntity<StatisticsResponse> buscarEstatisticas(){
         logger.info("Buscando estatísticas das transações realizadas nos ultimos 1 minuto");
         StatisticsResponse response = transacaoService.getStatistics();
