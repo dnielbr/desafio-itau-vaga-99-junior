@@ -49,8 +49,8 @@ public class TransacaoServiceImpl implements TransacaoService {
                 statistics.getCount(),
                 statistics.getSum(),
                 statistics.getAverage(),
-                statistics.getMin() > 0 ? statistics.getMin() : 0,
-                statistics.getMax() > 0 ? statistics.getMax() : 0
+                statistics.getCount() > 0 ? statistics.getMin() : 0,
+                statistics.getCount() > 0 ? statistics.getMax() : 0
         );
     }
 }
