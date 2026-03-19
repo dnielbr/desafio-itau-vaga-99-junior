@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("api")
 public class TransacaoController {
 
     private final Logger logger = LoggerFactory.getLogger(TransacaoController.class);
