@@ -31,4 +31,12 @@ public class Transacao {
     public boolean isValid() {
         return this.valor >= 0 && !this.dataHora.isAfter(OffsetDateTime.now());
     }
+
+    @Override
+    public String toString() {
+        return "Transacao{" +
+                "valor=" + valor +
+                ", dataHora=" + dataHora +
+                '}';
+    }
 }
